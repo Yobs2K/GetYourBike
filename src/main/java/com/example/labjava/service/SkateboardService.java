@@ -88,10 +88,8 @@ public class SkateboardService {
     }
 
     public void deleteSkateboard(Long id) throws ProductNotFoundException {
-        skateboardRepository.
-                delete(skateboardRepository.
-                        findById(id).
-                        orElseThrow(()-> new ProductNotFoundException())
-                );
+        Skateboard skateboard = skateboardRepository.findById(id).orElseThrow(() -> new ProductNotFoundException());
+        skateboard.setSkateWheel(null);
+        skateboardRepository.delete(skateboard);
     }
 }
