@@ -1,10 +1,12 @@
 package com.example.labjava.service;
 
 import com.example.labjava.dto.BicycleDTO;
+import com.example.labjava.exception.ProductNotFoundException;
 import com.example.labjava.model.Bicycle;
 import com.example.labjava.repository.BicycleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,12 +18,39 @@ public class BicycleService {
         this.bicycleRepository = bicycleRepository;
     }
 
-    public List<Bicycle> getBicycles() {
-        return bicycleRepository.findAll();
+    private List<BicycleDTO> getDtoListFromBicycleList(List<Bicycle> bicycleList) {
+        List<BicycleDTO> bicycleDTOList = new ArrayList<BicycleDTO>();
+        bicycleList.forEach(bicycle -> {
+            BicycleDTO bicycleDTO = new BicycleDTO();
+
+            bicycleDTO.setName(bicycle.getName());
+            bicycleDTO.setShortDesc(bicycle.getShortDesc());
+            bicycleDTO.setFullDesc(bicycle.getFullDesc());
+            bicycleDTO.setFrameType(bicycle.getFrameType());
+            bicycleDTO.setFrameSize(bicycle.getFrameSize());
+            bicycleDTO.setStyle(bicycle.getStyle());
+
+            bicycleDTOList.add(bicycleDTO);
+        });
+        return bicycleDTOList;
     }
 
-    public Bicycle getBicycle (Long id) {
-        return bicycleRepository.getById(id);
+    public List<BicycleDTO> getBicycles() {
+        return getDtoListFromBicycleList(bicycleRepository.findAll());
+    }
+
+    public BicycleDTO getBicycle (Long id) {
+        Bicycle bicycle = bicycleRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
+        BicycleDTO bicycleDTO = new BicycleDTO();
+
+        bicycleDTO.setName(bicycle.getName());
+        bicycleDTO.setShortDesc(bicycle.getShortDesc());
+        bicycleDTO.setFullDesc(bicycle.getFullDesc());
+        bicycleDTO.setFrameType(bicycle.getFrameType());
+        bicycleDTO.setFrameSize(bicycle.getFrameSize());
+        bicycleDTO.setStyle(bicycle.getStyle());
+
+        return bicycleDTO;
     }
 
     public void addBicycle(BicycleDTO bicycleDTO) {
@@ -37,7 +66,7 @@ public class BicycleService {
     }
 
     public void updateBicycle(BicycleDTO bicycleDTO, Long id) {
-        Bicycle updatedBicycle = bicycleRepository.getById(id);
+        Bicycle updatedBicycle = bicycleRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
 
         updatedBicycle.setName(bicycleDTO.getName());
         updatedBicycle.setShortDesc(bicycleDTO.getShortDesc());
@@ -49,7 +78,7 @@ public class BicycleService {
         bicycleRepository.save(updatedBicycle);
     }
 
-    public void deleteBicycle(Long id) {
-        bicycleRepository.deleteById(id);
+    public void deleteBicycle(Long id) throws ProductNotFoundException {
+        bicycleRepository.delete(bicycleRepository.findById(id).orElseThrow(()-> new ProductNotFoundException()));
     }
 }
