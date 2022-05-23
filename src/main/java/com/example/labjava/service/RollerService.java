@@ -18,34 +18,10 @@ public class RollerService {
         this.rollerRepository = rollerRepository;
     }
 
-    private List<RollerDTO> getDtoListFromRollerList(List<Roller> rollerList) {
-        List<RollerDTO> rollerDTOList = new ArrayList<RollerDTO>();
-        rollerList.forEach(roller -> {
-            RollerDTO rollerDTO = new RollerDTO();
-
-            rollerDTO.setName(roller.getName());
-            rollerDTO.setShortDesc(roller.getShortDesc());
-            rollerDTO.setFullDesc(roller.getFullDesc());
-            rollerDTO.setSize(roller.getSize());
-            rollerDTO.setWheelSize(roller.getWheelSize());
-            rollerDTO.setWheelNum(roller.getWheelNum());
-            rollerDTO.setAge(roller.getAge());
-            rollerDTO.setSex(roller.getSex());
-            rollerDTO.setColor(roller.getColor());
-
-            rollerDTOList.add(rollerDTO);
-        });
-        return rollerDTOList;
-    }
-
-    public List<RollerDTO> getRollers() {
-        return getDtoListFromRollerList(rollerRepository.findAll());
-    }
-
-    public RollerDTO getRoller (Long id) {
-        Roller roller = rollerRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
+    private RollerDTO getDtoFromRoller(Roller roller) {
         RollerDTO rollerDTO = new RollerDTO();
 
+        rollerDTO.setId(roller.getId());
         rollerDTO.setName(roller.getName());
         rollerDTO.setShortDesc(roller.getShortDesc());
         rollerDTO.setFullDesc(roller.getFullDesc());
@@ -59,36 +35,49 @@ public class RollerService {
         return rollerDTO;
     }
 
+    private Roller getRollerFromDto(RollerDTO rollerDTO) {
+        Roller roller = new Roller();
+
+        roller.setName(rollerDTO.getName());
+        roller.setShortDesc(rollerDTO.getShortDesc());
+        roller.setFullDesc(rollerDTO.getFullDesc());
+        roller.setSize(rollerDTO.getSize());
+        roller.setWheelSize(rollerDTO.getWheelSize());
+        roller.setWheelNum(rollerDTO.getWheelNum());
+        roller.setAge(rollerDTO.getAge());
+        roller.setSex(rollerDTO.getSex());
+        roller.setColor(rollerDTO.getColor());
+
+        return roller;
+    }
+
+    private List<RollerDTO> getDtoListFromRollerList(List<Roller> rollerList) {
+        List<RollerDTO> rollerDTOList = new ArrayList<RollerDTO>();
+        rollerList.forEach(roller -> {
+            RollerDTO rollerDTO = getDtoFromRoller(roller);
+            rollerDTOList.add(rollerDTO);
+        });
+        return rollerDTOList;
+    }
+
+    public List<RollerDTO> getRollers() {
+        return getDtoListFromRollerList(rollerRepository.findAll());
+    }
+
+    public RollerDTO getRoller (Long id) {
+        Roller roller = rollerRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
+        RollerDTO rollerDTO = getDtoFromRoller(roller);
+        return rollerDTO;
+    }
+
     public void addRoller(RollerDTO rollerDTO) {
-        Roller newRoller = new Roller();
-
-        newRoller.setName(rollerDTO.getName());
-        newRoller.setShortDesc(rollerDTO.getShortDesc());
-        newRoller.setFullDesc(rollerDTO.getFullDesc());
-        newRoller.setSize(rollerDTO.getSize());
-        newRoller.setWheelSize(rollerDTO.getWheelSize());
-        newRoller.setWheelNum(rollerDTO.getWheelNum());
-        newRoller.setAge(rollerDTO.getAge());
-        newRoller.setSex(rollerDTO.getSex());
-        newRoller.setColor(rollerDTO.getColor());
-
-
+        Roller newRoller = getRollerFromDto(rollerDTO);
         rollerRepository.save(newRoller);
     }
 
     public void updateRoller(RollerDTO rollerDTO, Long id) {
-        Roller updatedRoller = rollerRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
-
-        updatedRoller.setName(rollerDTO.getName());
-        updatedRoller.setShortDesc(rollerDTO.getShortDesc());
-        updatedRoller.setFullDesc(rollerDTO.getFullDesc());
-        updatedRoller.setSize(rollerDTO.getSize());
-        updatedRoller.setWheelSize(rollerDTO.getWheelSize());
-        updatedRoller.setWheelNum(rollerDTO.getWheelNum());
-        updatedRoller.setAge(rollerDTO.getAge());
-        updatedRoller.setSex(rollerDTO.getSex());
-        updatedRoller.setColor(rollerDTO.getColor());
-
+        Roller updatedRoller = getRollerFromDto(rollerDTO);
+        updatedRoller.setId(id);
         rollerRepository.save(updatedRoller);
     }
 

@@ -23,9 +23,6 @@ public class Skatewheel {
 
     private String wheelHardness; //Жёсткость колёс, а-ля 95A
 
-    @OneToMany(mappedBy="skateWheel")
-    private Set<Skateboard> skateboards;
-
     public Long getId() {
         return id;
     }

@@ -2,6 +2,8 @@ package com.example.labjava.dto;
 
 public class SkatewheelDTO {
 
+    private Long id;
+
     private String name;
 
     private String shortDesc;
@@ -11,6 +13,14 @@ public class SkatewheelDTO {
     private Double wheelSize; //Диаметр колёс, мм
 
     private String wheelHardness; //Жёсткость колёс, а-ля 95A
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

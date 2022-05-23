@@ -25,5 +25,67 @@ public class Skateboard {
     @JoinColumn(name = "skatewheel_id")
     private Skatewheel skateWheel;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getShortDesc() {
+        return shortDesc;
+    }
+
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
+    }
+
+    public String getFullDesc() {
+        return fullDesc;
+    }
+
+    public void setFullDesc(String fullDesc) {
+        this.fullDesc = fullDesc;
+    }
+
+    public Double getWidth() {
+        return width;
+    }
+
+    public void setWidth(Double width) {
+        this.width = width;
+    }
+
+    public Double getLength() {
+        return length;
+    }
+
+    public void setLength(Double length) {
+        this.length = length;
+    }
+
+    public Double getSuspensionWidth() {
+        return suspensionWidth;
+    }
+
+    public void setSuspensionWidth(Double suspensionWidth) {
+        this.suspensionWidth = suspensionWidth;
+    }
+
+    public Skatewheel getSkateWheel() {
+        return skateWheel;
+    }
+
+    public void setSkateWheel(Skatewheel skateWheel) {
+        this.skateWheel = skateWheel;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.labjava.controller;
 
 import com.example.labjava.dto.SkatewheelDTO;
+import com.example.labjava.exception.ForeignKeyConstraintException;
 import com.example.labjava.exception.ProductNotFoundException;
 import com.example.labjava.service.SkatewheelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,9 @@ public class SkatewheelController {
         }
         catch (ProductNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        catch (ForeignKeyConstraintException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return HttpStatus.OK;
     }

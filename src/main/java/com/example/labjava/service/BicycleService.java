@@ -18,18 +18,39 @@ public class BicycleService {
         this.bicycleRepository = bicycleRepository;
     }
 
+    private BicycleDTO getDtoFromBicycle(Bicycle bicycle) {
+        BicycleDTO bicycleDTO = new BicycleDTO();
+
+        bicycleDTO.setId(bicycle.getId());
+        bicycleDTO.setName(bicycle.getName());
+        bicycleDTO.setShortDesc(bicycle.getShortDesc());
+        bicycleDTO.setFullDesc(bicycle.getFullDesc());
+        bicycleDTO.setFrameType(bicycle.getFrameType());
+        bicycleDTO.setFrameSize(bicycle.getFrameSize());
+        bicycleDTO.setWheelSize(bicycle.getWheelSize());
+        bicycleDTO.setStyle(bicycle.getStyle());
+
+        return bicycleDTO;
+    }
+
+    private Bicycle getBicycleFromDto(BicycleDTO bicycleDTO) {
+        Bicycle bicycle = new Bicycle();
+
+        bicycle.setName(bicycleDTO.getName());
+        bicycle.setShortDesc(bicycleDTO.getShortDesc());
+        bicycle.setFullDesc(bicycleDTO.getFullDesc());
+        bicycle.setFrameType(bicycleDTO.getFrameType());
+        bicycle.setFrameSize(bicycleDTO.getFrameSize());
+        bicycle.setWheelSize(bicycleDTO.getWheelSize());
+        bicycle.setStyle(bicycleDTO.getStyle());
+
+        return bicycle;
+    }
+
     private List<BicycleDTO> getDtoListFromBicycleList(List<Bicycle> bicycleList) {
         List<BicycleDTO> bicycleDTOList = new ArrayList<BicycleDTO>();
         bicycleList.forEach(bicycle -> {
-            BicycleDTO bicycleDTO = new BicycleDTO();
-
-            bicycleDTO.setName(bicycle.getName());
-            bicycleDTO.setShortDesc(bicycle.getShortDesc());
-            bicycleDTO.setFullDesc(bicycle.getFullDesc());
-            bicycleDTO.setFrameType(bicycle.getFrameType());
-            bicycleDTO.setFrameSize(bicycle.getFrameSize());
-            bicycleDTO.setStyle(bicycle.getStyle());
-
+            BicycleDTO bicycleDTO = getDtoFromBicycle(bicycle);
             bicycleDTOList.add(bicycleDTO);
         });
         return bicycleDTOList;
@@ -41,40 +62,18 @@ public class BicycleService {
 
     public BicycleDTO getBicycle (Long id) {
         Bicycle bicycle = bicycleRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
-        BicycleDTO bicycleDTO = new BicycleDTO();
-
-        bicycleDTO.setName(bicycle.getName());
-        bicycleDTO.setShortDesc(bicycle.getShortDesc());
-        bicycleDTO.setFullDesc(bicycle.getFullDesc());
-        bicycleDTO.setFrameType(bicycle.getFrameType());
-        bicycleDTO.setFrameSize(bicycle.getFrameSize());
-        bicycleDTO.setStyle(bicycle.getStyle());
-
+        BicycleDTO bicycleDTO = getDtoFromBicycle(bicycle);
         return bicycleDTO;
     }
 
     public void addBicycle(BicycleDTO bicycleDTO) {
-        Bicycle newBicycle = new Bicycle();
-        newBicycle.setName(bicycleDTO.getName());
-        newBicycle.setShortDesc(bicycleDTO.getShortDesc());
-        newBicycle.setFullDesc(bicycleDTO.getFullDesc());
-        newBicycle.setFrameType(bicycleDTO.getFrameType());
-        newBicycle.setFrameSize(bicycleDTO.getFrameSize());
-        newBicycle.setStyle(bicycleDTO.getStyle());
-
+        Bicycle newBicycle = getBicycleFromDto(bicycleDTO);
         bicycleRepository.save(newBicycle);
     }
 
     public void updateBicycle(BicycleDTO bicycleDTO, Long id) {
-        Bicycle updatedBicycle = bicycleRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
-
-        updatedBicycle.setName(bicycleDTO.getName());
-        updatedBicycle.setShortDesc(bicycleDTO.getShortDesc());
-        updatedBicycle.setFullDesc(bicycleDTO.getFullDesc());
-        updatedBicycle.setFrameType(bicycleDTO.getFrameType());
-        updatedBicycle.setFrameSize(bicycleDTO.getFrameSize());
-        updatedBicycle.setStyle(bicycleDTO.getStyle());
-
+        Bicycle updatedBicycle = getBicycleFromDto(bicycleDTO);
+        updatedBicycle.setId(id);
         bicycleRepository.save(updatedBicycle);
     }
 
