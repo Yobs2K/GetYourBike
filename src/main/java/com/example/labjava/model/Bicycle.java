@@ -25,6 +25,8 @@ public class Bicycle {
 
     private String style;
 
+    private String imgLink;
+
     public Long getId() {
         return id;
     }
@@ -89,4 +91,11 @@ public class Bicycle {
         this.style = style;
     }
 
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
+    }
 }

@@ -18,6 +18,8 @@ public class BicycleDTO {
 
     private String style;
 
+    private String imgLink;
+
     public Long getId() {
         return id;
     }
@@ -80,5 +82,13 @@ public class BicycleDTO {
 
     public void setStyle(String style) {
         this.style = style;
+    }
+
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 }

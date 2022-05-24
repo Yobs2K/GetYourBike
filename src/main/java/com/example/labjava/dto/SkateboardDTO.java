@@ -20,6 +20,8 @@ public class SkateboardDTO {
 
     private SkatewheelDTO skatewheel;
 
+    private String imgLink;
+
     public Long getId() {
         return id;
     }
@@ -90,5 +92,13 @@ public class SkateboardDTO {
 
     public void setSkatewheel(SkatewheelDTO skatewheel) {
         this.skatewheel = skatewheel;
+    }
+
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 }

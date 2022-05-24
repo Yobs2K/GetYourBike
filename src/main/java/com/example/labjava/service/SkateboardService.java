@@ -35,6 +35,7 @@ public class SkateboardService {
         skateboardDTO.setWidth(skateboard.getWidth());
         skateboardDTO.setLength(skateboard.getLength());
         skateboardDTO.setSuspensionWidth(skateboard.getSuspensionWidth());
+        skateboardDTO.setImgLink(skateboard.getImgLink());
         skateboardDTO.setSkatewheelId(skateboard.getSkateWheel().getId());
         skateboardDTO.setSkatewheel(skatewheelService.getDtoFromSkatewheel(skateboard.getSkateWheel()));
 
@@ -50,6 +51,7 @@ public class SkateboardService {
         skateboard.setWidth(skateboardDTO.getWidth());
         skateboard.setLength(skateboardDTO.getLength());
         skateboard.setSuspensionWidth(skateboardDTO.getSuspensionWidth());
+        skateboard.setImgLink(skateboardDTO.getImgLink());
         Skatewheel skatewheel = skatewheelRepository.findById(skateboardDTO.getSkatewheelId()).
                 orElseThrow(() -> new ForeignKeyConstraintException());
         skateboard.setSkateWheel(skatewheel);

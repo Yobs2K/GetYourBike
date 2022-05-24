@@ -29,6 +29,8 @@ public class Roller {
 
     private String color;
 
+    private String imgLink;
+
     public Long getId() {
         return id;
     }
@@ -107,5 +109,13 @@ public class Roller {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 }

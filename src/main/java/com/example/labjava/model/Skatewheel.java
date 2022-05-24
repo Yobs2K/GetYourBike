@@ -23,6 +23,8 @@ public class Skatewheel {
 
     private String wheelHardness; //Жёсткость колёс, а-ля 95A
 
+    private String imgLink;
+
     public Long getId() {
         return id;
     }
@@ -69,5 +71,13 @@ public class Skatewheel {
 
     public void setWheelHardness(String wheelHardness) {
         this.wheelHardness = wheelHardness;
+    }
+
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 }

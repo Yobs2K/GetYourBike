@@ -29,6 +29,7 @@ public class BicycleService {
         bicycleDTO.setFrameSize(bicycle.getFrameSize());
         bicycleDTO.setWheelSize(bicycle.getWheelSize());
         bicycleDTO.setStyle(bicycle.getStyle());
+        bicycleDTO.setImgLink(bicycle.getImgLink());
 
         return bicycleDTO;
     }
@@ -43,6 +44,7 @@ public class BicycleService {
         bicycle.setFrameSize(bicycleDTO.getFrameSize());
         bicycle.setWheelSize(bicycleDTO.getWheelSize());
         bicycle.setStyle(bicycleDTO.getStyle());
+        bicycle.setImgLink(bicycleDTO.getImgLink());
 
         return bicycle;
     }

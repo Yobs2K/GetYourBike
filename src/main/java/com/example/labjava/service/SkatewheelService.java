@@ -29,6 +29,7 @@ public class SkatewheelService {
         skatewheelDTO.setFullDesc(skatewheel.getFullDesc());
         skatewheelDTO.setWheelSize(skatewheel.getWheelSize());
         skatewheelDTO.setWheelHardness(skatewheel.getWheelHardness());
+        skatewheelDTO.setImgLink(skatewheel.getImgLink());
 
         return skatewheelDTO;
     }
@@ -41,6 +42,7 @@ public class SkatewheelService {
         skatewheel.setFullDesc(skatewheelDTO.getFullDesc());
         skatewheel.setWheelSize(skatewheelDTO.getWheelSize());
         skatewheel.setWheelHardness(skatewheelDTO.getWheelHardness());
+        skatewheel.setImgLink(skatewheelDTO.getImgLink());
 
         return skatewheel;
     }

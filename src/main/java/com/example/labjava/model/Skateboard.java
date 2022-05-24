@@ -21,6 +21,8 @@ public class Skateboard {
 
     private Double suspensionWidth; //ширина подвески, мм
 
+    private String imgLink;
+
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "skatewheel_id")
     private Skatewheel skateWheel;
@@ -87,5 +89,13 @@ public class Skateboard {
 
     public void setSkateWheel(Skatewheel skateWheel) {
         this.skateWheel = skateWheel;
+    }
+
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 }

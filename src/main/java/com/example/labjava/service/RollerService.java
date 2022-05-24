@@ -31,6 +31,7 @@ public class RollerService {
         rollerDTO.setAge(roller.getAge());
         rollerDTO.setSex(roller.getSex());
         rollerDTO.setColor(roller.getColor());
+        rollerDTO.setImgLink(roller.getImgLink());
 
         return rollerDTO;
     }
@@ -47,6 +48,7 @@ public class RollerService {
         roller.setAge(rollerDTO.getAge());
         roller.setSex(rollerDTO.getSex());
         roller.setColor(rollerDTO.getColor());
+        roller.setImgLink(rollerDTO.getImgLink());
 
         return roller;
     }
