@@ -26,7 +26,7 @@ public class BicycleService {
         bicycleDTO.setShortDesc(bicycle.getShortDesc());
         bicycleDTO.setFullDesc(bicycle.getFullDesc());
         bicycleDTO.setFrameType(bicycle.getFrameType());
-        bicycleDTO.setFrameSize(bicycle.getFrameSize());
+        bicycleDTO.setFrameSize(bicycle.getWeight());
         bicycleDTO.setWheelSize(bicycle.getWheelSize());
         bicycleDTO.setStyle(bicycle.getStyle());
         bicycleDTO.setImgLink(bicycle.getImgLink());
@@ -41,7 +41,7 @@ public class BicycleService {
         bicycle.setShortDesc(bicycleDTO.getShortDesc());
         bicycle.setFullDesc(bicycleDTO.getFullDesc());
         bicycle.setFrameType(bicycleDTO.getFrameType());
-        bicycle.setFrameSize(bicycleDTO.getFrameSize());
+        bicycle.setWeight(bicycleDTO.getFrameSize());
         bicycle.setWheelSize(bicycleDTO.getWheelSize());
         bicycle.setStyle(bicycleDTO.getStyle());
         bicycle.setImgLink(bicycleDTO.getImgLink());

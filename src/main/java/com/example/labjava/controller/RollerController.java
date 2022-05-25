@@ -4,6 +4,7 @@ import com.example.labjava.dto.RollerDTO;
 import com.example.labjava.exception.ProductNotFoundException;
 import com.example.labjava.service.RollerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,12 @@ public class RollerController {
     }
 
     @GetMapping
-    public List<RollerDTO> getAllRollers() {
-        return rollerService.getRollers();
+    public ResponseEntity<List<RollerDTO>> getAllRollers() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok().
+                headers(httpHeaders).
+                body(rollerService.getRollers());
     }
 
     @GetMapping(value = "/{id}")

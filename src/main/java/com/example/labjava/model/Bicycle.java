@@ -1,5 +1,6 @@
 package com.example.labjava.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,11 +16,12 @@ public class Bicycle {
 
     private String shortDesc;
 
+    @Column(length = 4000)
     private String fullDesc;
 
     private String frameType;
 
-    private Double frameSize;
+    private Double weight;
 
     private Double wheelSize;
 
@@ -67,12 +69,12 @@ public class Bicycle {
         this.frameType = frameType;
     }
 
-    public Double getFrameSize() {
-        return frameSize;
+    public Double getWeight() {
+        return weight;
     }
 
-    public void setFrameSize(Double frameSize) {
-        this.frameSize = frameSize;
+    public void setWeight(Double frameSize) {
+        this.weight = frameSize;
     }
 
     public Double getWheelSize() {

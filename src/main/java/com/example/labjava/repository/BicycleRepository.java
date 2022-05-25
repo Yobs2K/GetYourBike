@@ -12,6 +12,6 @@ import java.util.List;
 public interface BicycleRepository extends JpaRepository<Bicycle, Long> {
     public List<Bicycle> findBicycleByStyle(String style);
 
-    @Query("SELECT style FROM Bicycle GROUP BY style")
+    @Query("SELECT style FROM Bicycle GROUP BY style ORDER BY style")
     public List<String> getAllStyles();
 }

@@ -5,6 +5,7 @@ import com.example.labjava.exception.ForeignKeyConstraintException;
 import com.example.labjava.exception.ProductNotFoundException;
 import com.example.labjava.service.SkateboardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +25,12 @@ public class SkateboardController {
     }
 
     @GetMapping
-    public List<SkateboardDTO> getAllSkateboards() {
-        return skateboardService.getSkateboards();
+    public ResponseEntity<List<SkateboardDTO>> getAllSkateboards() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.ok().
+                headers(httpHeaders).
+                body(skateboardService.getSkateboards());
     }
 
     @GetMapping(value = "/{id}")
