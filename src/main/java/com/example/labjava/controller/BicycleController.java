@@ -4,6 +4,7 @@ import com.example.labjava.dto.BicycleDTO;
 import com.example.labjava.exception.ProductNotFoundException;
 import com.example.labjava.service.BicycleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +24,18 @@ public class BicycleController {
     }
 
     @GetMapping
-    public List<BicycleDTO> getAllBicycles() {
-        return bicycleService.getBicycles();
+    public ResponseEntity<List<BicycleDTO>> getAllBicycles(@RequestParam(name = "style", required = false) String style) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
+        if (style == null)
+            return ResponseEntity.ok().
+                    headers(httpHeaders).
+                    body(bicycleService.getBicycles());
+        return ResponseEntity.ok().
+                headers(httpHeaders).
+                body(bicycleService.getBicyclesByStyle(style));
     }
+
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<BicycleDTO> getBicycleById(@PathVariable("id") final Long id) {

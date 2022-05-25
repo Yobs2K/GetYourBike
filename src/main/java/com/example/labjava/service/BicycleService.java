@@ -62,6 +62,10 @@ public class BicycleService {
         return getDtoListFromBicycleList(bicycleRepository.findAll());
     }
 
+    public List<BicycleDTO> getBicyclesByStyle(String style) {
+        return getDtoListFromBicycleList(bicycleRepository.findBicycleByStyle(style));
+    }
+
     public BicycleDTO getBicycle (Long id) {
         Bicycle bicycle = bicycleRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
         BicycleDTO bicycleDTO = getDtoFromBicycle(bicycle);
