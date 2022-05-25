@@ -86,4 +86,11 @@ public class BicycleService {
     public void deleteBicycle(Long id) throws ProductNotFoundException {
         bicycleRepository.delete(bicycleRepository.findById(id).orElseThrow(()-> new ProductNotFoundException()));
     }
+
+    public List<String> getBicycleStyles() {
+        List <String> styles;
+        styles = bicycleRepository.getAllStyles();
+        return styles;
+    }
+
 }
