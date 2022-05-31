@@ -34,6 +34,8 @@ public class RollerController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<RollerDTO> getRollerById(@PathVariable("id") final Long id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
         RollerDTO rollerDTO;
         try {
             rollerDTO = rollerService.getRoller(id);
@@ -41,7 +43,9 @@ public class RollerController {
         catch (ProductNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(rollerDTO);
+        return ResponseEntity.ok().
+                headers(httpHeaders).
+                body(rollerDTO);
     }
 
     @DeleteMapping(value = "/{id}")

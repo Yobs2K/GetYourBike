@@ -35,6 +35,8 @@ public class SkatewheelController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<SkatewheelDTO> getSkatewheelById(@PathVariable("id") final Long id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
         SkatewheelDTO skatewheelDTO;
         try {
             skatewheelDTO = skatewheelService.getSkatewheel(id);
@@ -42,7 +44,9 @@ public class SkatewheelController {
         catch (ProductNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(skatewheelDTO);
+        return ResponseEntity.ok().
+                headers(httpHeaders).
+                body(skatewheelDTO);
     }
 
     @DeleteMapping(value = "/{id}")

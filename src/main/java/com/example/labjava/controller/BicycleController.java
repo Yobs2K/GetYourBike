@@ -39,6 +39,8 @@ public class BicycleController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<BicycleDTO> getBicycleById(@PathVariable("id") final Long id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
         BicycleDTO bicycleDTO;
         try {
             bicycleDTO = bicycleService.getBicycle(id);
@@ -46,7 +48,9 @@ public class BicycleController {
         catch (ProductNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(bicycleDTO);
+        return ResponseEntity.ok().
+                headers(httpHeaders).
+                body(bicycleDTO);
     }
 
     @DeleteMapping(value = "/{id}")

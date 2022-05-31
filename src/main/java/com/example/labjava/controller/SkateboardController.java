@@ -35,6 +35,8 @@ public class SkateboardController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<SkateboardDTO> getSkateboardById(@PathVariable("id") final Long id) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Access-Control-Allow-Origin", "*");
         SkateboardDTO skateboardDTO;
         try {
             skateboardDTO = skateboardService.getSkateboard(id);
@@ -42,7 +44,9 @@ public class SkateboardController {
         catch (ProductNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(skateboardDTO);
+        return ResponseEntity.ok().
+                headers(httpHeaders).
+                body(skateboardDTO);
     }
 
     @DeleteMapping(value = "/{id}")
